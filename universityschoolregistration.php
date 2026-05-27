@@ -7,8 +7,12 @@ $result = ai_handle_submission(
     [
         'institution_name' => 'Institution Name',
         'institution_type' => 'Type of Institution',
-        'country_city' => 'Country / City',
+        'country' => 'Country',
+        'city' => 'City',
+        'number_of_students' => 'Number of Students',
+        'number_of_teachers' => 'Number of Teachers',
         'contact_person' => 'Contact Person',
+        'position_designation' => 'Position / Designation',
         'official_email' => 'Official Email',
         'official_mobile' => 'Official Mobile Number',
         'partnership_option' => 'Partnership Option',
@@ -27,7 +31,14 @@ $result = ai_handle_submission(
     <div class="ai-form-title">
         <p class="ai-kicker">Build the future of education</p>
         <h1>University / School <span class="ai-gradient-text">Registration</span></h1>
-        <p>Transform your institution with AI-powered smart campus, LMS, analytics, cloud security, and global partnership opportunities.</p>
+        <p>Transform Your Institution With AI-Powered Solutions</p>
+        <div class="ai-chip-line">
+            <span class="ai-pill"><?php echo ai_icon('gift'); ?>Free Platform Demo</span>
+            <span class="ai-pill"><?php echo ai_icon('clock'); ?>1 Month Trial Access</span>
+            <span class="ai-pill"><?php echo ai_icon('headset'); ?>Free Consultation Session</span>
+            <span class="ai-pill"><?php echo ai_icon('ai'); ?>AI Transformation Roadmap</span>
+            <span class="ai-pill"><?php echo ai_icon('globe'); ?>Partnership & Global Opportunities</span>
+        </div>
     </div>
 </main>
 
@@ -35,13 +46,14 @@ $result = ai_handle_submission(
     <aside class="ai-form-sidebar">
         <h2>Institution Benefits</h2>
         <ul class="ai-list">
-            <li>AI smart campus solutions.</li>
-            <li>LMS and ERP integration options.</li>
-            <li>AI exam and analytics ecosystem.</li>
-            <li>Student and teacher portals.</li>
-            <li>International partnerships.</li>
-            <li>Secure AWS infrastructure.</li>
-            <li>AI transformation roadmap.</li>
+            <li>AI Smart Campus Solutions</li>
+            <li>LMS & ERP Integration</li>
+            <li>AI Exam & Analytics</li>
+            <li>Student & Teacher Portals</li>
+            <li>International Partnerships</li>
+            <li>Secure AWS Infrastructure</li>
+            <li>24/7 Dedicated Support</li>
+            <li>AI Transformation Roadmap</li>
         </ul>
     </aside>
 
@@ -63,28 +75,32 @@ $result = ai_handle_submission(
                     </select>
                 </div>
                 <div class="ai-field">
-                    <label for="country_city">Country / City *</label>
-                    <input id="country_city" name="country_city" type="text" value="<?php echo ai_old('country_city'); ?>" required>
+                    <label for="country">Country *</label>
+                    <input id="country" name="country" type="text" value="<?php echo ai_old('country'); ?>" required>
+                </div>
+                <div class="ai-field">
+                    <label for="city">City *</label>
+                    <input id="city" name="city" type="text" value="<?php echo ai_old('city'); ?>" required>
                 </div>
                 <div class="ai-field full">
                     <label for="website">Website</label>
                     <input id="website" name="website" type="url" value="<?php echo ai_old('website'); ?>">
                 </div>
                 <div class="ai-field">
-                    <label for="number_of_students">Number of Students</label>
-                    <input id="number_of_students" name="number_of_students" type="text" value="<?php echo ai_old('number_of_students'); ?>">
+                    <label for="number_of_students">Number of Students *</label>
+                    <input id="number_of_students" name="number_of_students" type="text" value="<?php echo ai_old('number_of_students'); ?>" required>
                 </div>
                 <div class="ai-field">
-                    <label for="number_of_teachers">Number of Teachers</label>
-                    <input id="number_of_teachers" name="number_of_teachers" type="text" value="<?php echo ai_old('number_of_teachers'); ?>">
+                    <label for="number_of_teachers">Number of Teachers *</label>
+                    <input id="number_of_teachers" name="number_of_teachers" type="text" value="<?php echo ai_old('number_of_teachers'); ?>" required>
                 </div>
                 <div class="ai-field">
                     <label for="contact_person">Contact Person *</label>
                     <input id="contact_person" name="contact_person" type="text" value="<?php echo ai_old('contact_person'); ?>" required>
                 </div>
                 <div class="ai-field">
-                    <label for="position_designation">Position / Designation</label>
-                    <input id="position_designation" name="position_designation" type="text" value="<?php echo ai_old('position_designation'); ?>">
+                    <label for="position_designation">Position / Designation *</label>
+                    <input id="position_designation" name="position_designation" type="text" value="<?php echo ai_old('position_designation'); ?>" required>
                 </div>
                 <div class="ai-field">
                     <label for="official_email">Official Email *</label>
@@ -139,12 +155,27 @@ $result = ai_handle_submission(
                     <a href="sbciairegistration.php" class="ai-button secondary">Back to Portals</a>
                     <button class="ai-button" type="submit">Register Institution</button>
                 </div>
+                <div class="ai-field full">
+                    <p style="color: var(--ai-muted); text-align: center; margin: 0;">We will contact you within 24 hours!</p>
+                </div>
             </div>
         </form>
     </div>
 </section>
 
-<?php ai_render_footer(); ?>
+<section class="ai-section ai-alt" style="padding-top: 0;">
+    <div class="ai-container">
+        <div class="ai-feature-grid five">
+            <div class="ai-feature-tile row"><?php echo ai_icon('handshake'); ?><strong>Let's Build a Smarter Education Ecosystem Together</strong></div>
+            <div class="ai-feature-tile row"><?php echo ai_icon('library'); ?><strong>200+ Institutions</strong></div>
+            <div class="ai-feature-tile row"><?php echo ai_icon('users'); ?><strong>500K+ Students</strong></div>
+            <div class="ai-feature-tile row"><?php echo ai_icon('teacher'); ?><strong>10K+ Teachers</strong></div>
+            <div class="ai-feature-tile row"><?php echo ai_icon('globe'); ?><strong>10+ Countries</strong></div>
+        </div>
+    </div>
+</section>
+
+<?php ai_render_ai_footer(); ?>
 <?php ai_render_scripts(); ?>
 </body>
 </html>

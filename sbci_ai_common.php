@@ -5,6 +5,52 @@ function ai_h($value) {
     return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
 }
 
+function ai_icon($name) {
+    $icons = [
+        'ai' => '<path d="M12 2v3"/><path d="M12 19v3"/><path d="M2 12h3"/><path d="M19 12h3"/><path d="m4.9 4.9 2.1 2.1"/><path d="m17 17 2.1 2.1"/><path d="m19.1 4.9-2.1 2.1"/><path d="m7 17-2.1 2.1"/><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 11h4"/><path d="M10 14h2"/>',
+        'analytics' => '<path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15v-4"/><path d="M12 15V8"/><path d="M16 15v-7"/><path d="m16 8 2 2 3-4"/>',
+        'book' => '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h8"/><path d="M8 11h6"/>',
+        'bot' => '<rect x="5" y="8" width="14" height="10" rx="2"/><path d="M12 8V4"/><circle cx="9" cy="13" r="1"/><circle cx="15" cy="13" r="1"/><path d="M9 17h6"/><path d="M8 4h8"/>',
+        'briefcase' => '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/>',
+        'calendar' => '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><path d="M8 14h4"/><path d="M8 18h8"/>',
+        'certificate' => '<circle cx="12" cy="8" r="4"/><path d="M8.5 11 7 22l5-3 5 3-1.5-11"/><path d="m10 8 1.2 1.2L14 6.5"/>',
+        'check' => '<path d="M20 6 9 17l-5-5"/>',
+        'clock' => '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+        'cloud' => '<path d="M17.5 19H7a5 5 0 1 1 1.5-9.8A6.5 6.5 0 0 1 21 12.5 3.5 3.5 0 0 1 17.5 19z"/>',
+        'coins' => '<ellipse cx="8" cy="6" rx="5" ry="3"/><path d="M3 6v6c0 1.7 2.2 3 5 3s5-1.3 5-3V6"/><path d="M13 10c2.8 0 5 1.3 5 3s-2.2 3-5 3"/><path d="M18 13v5c0 1.7-2.2 3-5 3-2.1 0-3.9-.8-4.6-2"/>',
+        'database' => '<ellipse cx="12" cy="5" rx="7" ry="3"/><path d="M5 5v14c0 1.7 3.1 3 7 3s7-1.3 7-3V5"/><path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/>',
+        'dollar' => '<path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6"/>',
+        'exam' => '<path d="M8 3h8l4 4v14H4V3h4z"/><path d="M16 3v5h5"/><path d="M8 12h8"/><path d="M8 16h4"/><path d="m15 17 1.2 1.2L19 15"/>',
+        'gift' => '<rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13"/><path d="M3 12h18"/><path d="M7.5 8a2.5 2.5 0 1 1 4.5-1.5V8"/><path d="M16.5 8a2.5 2.5 0 1 0-4.5-1.5V8"/>',
+        'gear' => '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8 1.7 1.7 0 0 0 1.5 1h.2a2 2 0 1 1 0 4h-.2a1.7 1.7 0 0 0-1.4 1z"/>',
+        'globe' => '<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 0 20"/><path d="M12 2a15.3 15.3 0 0 0 0 20"/>',
+        'graduation' => '<path d="m22 10-10-5-10 5 10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/><path d="M22 10v6"/>',
+        'handshake' => '<path d="m11 17 2 2a3 3 0 0 0 4.2 0l3.8-3.8a3 3 0 0 0 0-4.2l-3-3-6 6"/><path d="m2 12 6-6 4 4"/><path d="m7 17-5-5"/><path d="m17 7 5 5"/>',
+        'headset' => '<path d="M4 13a8 8 0 0 1 16 0"/><path d="M4 13v3a2 2 0 0 0 2 2h1v-7H6a2 2 0 0 0-2 2z"/><path d="M20 13v3a2 2 0 0 1-2 2h-1v-7h1a2 2 0 0 1 2 2z"/><path d="M14 20h-4"/>',
+        'laptop' => '<rect x="5" y="4" width="14" height="11" rx="2"/><path d="M3 20h18"/><path d="M8 15h8"/>',
+        'library' => '<path d="M4 19h16"/><path d="M6 17V7"/><path d="M10 17V5"/><path d="M14 17V7"/><path d="M18 17V5"/><path d="M4 7h16"/><path d="M4 5h16"/>',
+        'lock' => '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><path d="M12 15v2"/>',
+        'mail' => '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+        'map-pin' => '<path d="M12 21s7-5.2 7-12A7 7 0 1 0 5 9c0 6.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/>',
+        'phone' => '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.4 2.1L8 9.7a16 16 0 0 0 6.3 6.3l1.3-1.3a2 2 0 0 1 2.1-.4c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/>',
+        'rocket' => '<path d="M4.5 16.5c-1.5 1.3-2 3.7-2 5 1.3 0 3.7-.5 5-2"/><path d="M9 15 6 18"/><path d="M15 9 9 15"/><path d="M15 9c2-4 5-6 7-7 0 2-3 5-7 7z"/><path d="M14 10l4 4"/><path d="M9 15l-1-4 4 1"/>',
+        'school' => '<path d="M3 21h18"/><path d="M5 21V9l7-4 7 4v12"/><path d="M9 21v-6h6v6"/><path d="M8 11h2"/><path d="M14 11h2"/>',
+        'shield' => '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-5"/>',
+        'star' => '<path d="m12 2 3 6 6.6 1-4.8 4.6 1.2 6.4-6-3.2-6 3.2 1.2-6.4L2.4 9 9 8z"/>',
+        'teacher' => '<path d="M3 4h18v12H3z"/><path d="M8 21h8"/><path d="M12 16v5"/><circle cx="8" cy="10" r="2"/><path d="M12 12h5"/><path d="M12 8h5"/>',
+        'training' => '<rect x="4" y="5" width="16" height="12" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="m10 9 4 3-4 3z"/>',
+        'upload' => '<path d="M12 3v12"/><path d="m7 8 5-5 5 5"/><path d="M5 21h14"/>',
+        'users' => '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/>',
+        'video' => '<rect x="3" y="5" width="14" height="14" rx="2"/><path d="m17 9 4-2v10l-4-2z"/>',
+    ];
+
+    if (!isset($icons[$name])) {
+        return '';
+    }
+
+    return '<span class="ai-design-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' . $icons[$name] . '</svg></span>';
+}
+
 function ai_old($name, $default = '') {
     $value = $_POST[$name] ?? $default;
     return is_array($value) ? '' : ai_h($value);
@@ -199,16 +245,6 @@ function ai_render_head($title) {
 }
 
 function ai_render_nav($active = '') {
-    $items = [
-        ['Home', 'index.php', 'home'],
-        ['SBCI AI', 'sbciai.php', 'ai'],
-        ['Ecosystem', 'sbciai.php#ecosystem', 'ecosystem'],
-        ['Packages', 'sbciai.php#packages', 'packages'],
-        ['Plans', 'sbciairegistration.php#comparison', 'plans'],
-        ['Registration', 'sbciairegistration.php', 'registration'],
-        ['Sponsorship', 'sbciaisponsor.php', 'sponsor'],
-        ['Partner', 'sbciaipartner.php', 'partner'],
-    ];
     ?>
     <header class="ai-nav">
         <a href="sbciai.php" class="ai-brand" aria-label="SBCI AI Home">
@@ -219,9 +255,24 @@ function ai_render_nav($active = '') {
             <span></span><span></span><span></span>
         </button>
         <nav class="ai-nav-links">
-            <?php foreach ($items as $item): ?>
-                <a href="<?php echo ai_h($item[1]); ?>" class="<?php echo $active === $item[2] ? 'active' : ''; ?>"><?php echo ai_h($item[0]); ?></a>
-            <?php endforeach; ?>
+            <a href="index.php" class="<?php echo $active === 'home' ? 'active' : ''; ?>">Home</a>
+            <a href="sbciai.php" class="<?php echo $active === 'ai' ? 'active' : ''; ?>">SBCI AI</a>
+            <a href="sbciai.php#ecosystem">Ecosystem</a>
+            <a href="sbciai.php#packages">Packages</a>
+            <a href="sbciairegistration.php#comparison">Plans</a>
+
+            <!-- Registration Dropdown -->
+            <div class="ai-dropdown <?php echo in_array($active, ['registration', 'sponsor', 'partner'], true) ? 'active' : ''; ?>">
+                <span class="ai-dropdown-toggle">Registration <span class="ai-arrow">&#9662;</span></span>
+                <div class="ai-dropdown-menu">
+                    <a href="sbciaistudentregistration.php" class="<?php echo $active === 'registration' && basename($_SERVER['PHP_SELF']) === 'sbciaistudentregistration.php' ? 'active' : ''; ?>">Student Portal</a>
+                    <a href="sbciteacherregistration.php" class="<?php echo $active === 'registration' && basename($_SERVER['PHP_SELF']) === 'sbciteacherregistration.php' ? 'active' : ''; ?>">Teacher Portal</a>
+                    <a href="universityschoolregistration.php" class="<?php echo $active === 'registration' && basename($_SERVER['PHP_SELF']) === 'universityschoolregistration.php' ? 'active' : ''; ?>">University/School Portal</a>
+                    <a href="sbciaisponsor.php" class="<?php echo $active === 'sponsor' ? 'active' : ''; ?>">Sponsorship Form</a>
+                    <a href="sbciaipartner.php" class="<?php echo $active === 'partner' ? 'active' : ''; ?>">Partner Form</a>
+                </div>
+            </div>
+
             <a class="ai-nav-whatsapp" href="https://wa.me/971506264883" target="_blank" rel="noopener">WhatsApp</a>
         </nav>
     </header>
@@ -234,34 +285,34 @@ function ai_render_footer() {
         <div class="ai-footer-main">
             <div class="ai-footer-brand">
                 <img src="assets/logo.png" alt="SBCI Global">
-                <p>SBCI Global helps businesses and education communities launch smarter and scale faster through expert consulting, setup, and digital solutions.</p>
+                <p>SBCI Global helps businesses launch smarter and scale faster through expert consulting, setup, and digital solutions. Let's build your success story together.</p>
             </div>
             <div class="ai-footer-connect">
                 <p class="ai-section-kicker">Let's Connect</p>
                 <div class="ai-contact-grid">
                     <div class="ai-contact-item">
-                        <span class="ai-contact-icon">PIN</span>
+                        <span class="ai-contact-icon"><?php echo ai_icon('map-pin'); ?></span>
                         <div>
                             <strong>UAE Office</strong>
                             <p>Rakez Compass UAE | RAK</p>
                         </div>
                     </div>
                     <div class="ai-contact-item">
-                        <span class="ai-contact-icon">TEL</span>
+                        <span class="ai-contact-icon"><?php echo ai_icon('phone'); ?></span>
                         <div>
                             <strong>UAE Contact</strong>
                             <p><a href="tel:+971506264883">+971 50 626 4883</a></p>
                         </div>
                     </div>
                     <div class="ai-contact-item">
-                        <span class="ai-contact-icon">PIN</span>
+                        <span class="ai-contact-icon"><?php echo ai_icon('map-pin'); ?></span>
                         <div>
                             <strong>Egypt Office</strong>
                             <p>SkyMall Co Work Space Mirror</p>
                         </div>
                     </div>
                     <div class="ai-contact-item">
-                        <span class="ai-contact-icon">TEL</span>
+                        <span class="ai-contact-icon"><?php echo ai_icon('phone'); ?></span>
                         <div>
                             <strong>Egypt Contact</strong>
                             <p><a href="tel:+201222640202">+20 12 22 64 02 02</a></p>
@@ -269,7 +320,7 @@ function ai_render_footer() {
                     </div>
                 </div>
                 <div class="ai-footer-cta">
-                    <img src="assets/qr_scan.png" alt="Scan to join SBCI Global">
+                    <img src="assets/qr_scan.png" alt="Scan | Join Us">
                     <div>
                         <strong>Join our success stories.</strong>
                         <p>Contact us for free consultation with our experts.</p>
@@ -281,11 +332,51 @@ function ai_render_footer() {
             </div>
         </div>
         <div class="ai-footer-bottom">
-            <span>Authorized Business Partner</span>
-            <span>Global Presence. Local Expertise.</span>
-            <span>Trusted by Entrepreneurs</span>
-            <span>&copy; 2026 SBCI Global. All Rights Reserved.</span>
+            <span>AUTHORIZED BUSINESS PARTNER</span>
+            <span>GLOBAL PRESENCE LOCAL EXPERTISE</span>
+            <span>TRUSTED BY ENTREPRENEURS</span>
+            <span>&copy; 2025 SBCI Global. All Rights Reserved.</span>
             <a href="mailto:info@sbciglobal.com">info@sbciglobal.com</a>
+        </div>
+    </footer>
+    <?php
+}
+
+function ai_render_ai_footer() {
+    ai_render_footer();
+    return;
+    ?>
+    <footer class="ai-footer">
+        <div class="ai-footer-main" style="border-bottom: none; padding-bottom: 20px;">
+            <div class="ai-footer-brand" style="border-right: none; display: flex; align-items: center; gap: 15px; flex-wrap: wrap; width: 100%; justify-content: space-between;">
+                <a href="sbciai.php" class="ai-brand" aria-label="SBCI AI Home" style="text-decoration: none; color: inherit;">
+                    <img src="assets/f1eeeaa9-3e7a-4138-923b-bb59988e5f9c.jpg" alt="SBCI AI Logo" style="width: clamp(50px, 8vw, 64px); height: auto; border-radius: 8px;">
+                    <span style="font-size: 22px; font-weight: 800; white-space: nowrap;">SBCI <strong style="color: var(--ai-orange);">AI</strong></span>
+                </a>
+                <p style="margin: 0; color: var(--ai-muted); font-size: 14px; max-width: 600px;">SMART LEARNING. UNLIMITED CONNECTIONS.</p>
+            </div>
+        </div>
+
+        <div class="ai-footer-bottom" style="border-top: 1px solid rgba(47, 176, 186, 0.35); padding: 26px clamp(16px, 4vw, 56px); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; color: #cbd1e6; font-size: 13px;">
+            <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+                <span style="display: flex; align-items: center; gap: 8px;">
+                    <span style="color: var(--ai-teal); font-weight: bold;">✓</span> Trusted by Educators Worldwide
+                </span>
+                <span style="display: flex; align-items: center; gap: 8px;">
+                    <span style="color: var(--ai-teal); font-weight: bold;">✓</span> AI-Powered Smarter Education
+                </span>
+                <span style="display: flex; align-items: center; gap: 8px;">
+                    <span style="color: var(--ai-teal); font-weight: bold;">✓</span> Global Community Connecting Minds
+                </span>
+            </div>
+            <div style="display: flex; gap: 20px; font-weight: bold;">
+                <a href="https://www.sbciglobal.com" target="_blank" rel="noopener" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+                    <span style="color: var(--ai-teal);">🌐</span> www.sbciglobal.com
+                </a>
+                <a href="mailto:support@sbciglobal.com" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+                    <span style="color: var(--ai-teal);">✉</span> support@sbciglobal.com
+                </a>
+            </div>
         </div>
     </footer>
     <?php

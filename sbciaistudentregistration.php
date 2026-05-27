@@ -8,7 +8,9 @@ $result = ai_handle_submission(
         'full_name' => 'Full Name',
         'email_address' => 'Email Address',
         'whatsapp_number' => 'Mobile Number / WhatsApp',
+        'city_country' => 'City / Country',
         'school_name' => 'School / University Name',
+        'faculty_major' => 'Faculty / Major',
         'selected_plan' => 'Selected Student Plan',
     ],
     ['student_photo' => 'Student Photo']
@@ -37,7 +39,14 @@ if (!in_array($studentCurrency, ['EGP', 'USD'], true)) {
     <div class="ai-form-title">
         <p class="ai-kicker">Start your future with AI</p>
         <h1>Student <span class="ai-gradient-text">Registration</span></h1>
-        <p>Join thousands of students learning smarter with SBCI AI tools, digital certificates, AI study support, and career opportunities.</p>
+        <p>Join Thousands of Students Learning Smarter with AI</p>
+        <div class="ai-chip-line">
+            <span class="ai-pill"><?php echo ai_icon('clock'); ?>1 Month FREE Access</span>
+            <span class="ai-pill"><?php echo ai_icon('gift'); ?>Free Demo</span>
+            <span class="ai-pill"><?php echo ai_icon('dollar'); ?>Cashback Up To 20%</span>
+            <span class="ai-pill"><?php echo ai_icon('certificate'); ?>International Certificates</span>
+            <span class="ai-pill"><?php echo ai_icon('briefcase'); ?>Career & Internship Opportunities</span>
+        </div>
     </div>
 </main>
 
@@ -45,13 +54,14 @@ if (!in_array($studentCurrency, ['EGP', 'USD'], true)) {
     <aside class="ai-form-sidebar">
         <h2>Student Benefits</h2>
         <ul class="ai-list">
-            <li>1 Month free subscription voucher.</li>
-            <li>Free AI demo and learning tools.</li>
-            <li>Cashback up to 20%.</li>
-            <li>Access to premium courses.</li>
-            <li>Smart notes and AI assistant.</li>
-            <li>International certificates.</li>
-            <li>Internships and career support.</li>
+            <li>1 Month Free Subscription Voucher</li>
+            <li>Free AI Demo & Learning Tools</li>
+            <li>Cashback Up To 20%</li>
+            <li>Access to Premium Courses</li>
+            <li>Smart Notes & AI Assistant</li>
+            <li>International Certificates</li>
+            <li>Priority Access to Workshops</li>
+            <li>Internships & Career Support</li>
         </ul>
     </aside>
 
@@ -89,11 +99,11 @@ if (!in_array($studentCurrency, ['EGP', 'USD'], true)) {
                     <input id="nationality" name="nationality" type="text" value="<?php echo ai_old('nationality'); ?>">
                 </div>
                 <div class="ai-field full">
-                    <label for="city_country">City / Country</label>
-                    <input id="city_country" name="city_country" type="text" value="<?php echo ai_old('city_country'); ?>">
+                    <label for="city_country">City / Country *</label>
+                    <input id="city_country" name="city_country" type="text" value="<?php echo ai_old('city_country'); ?>" required>
                 </div>
                 <div class="ai-field full">
-                    <label for="student_photo">Student Photo Upload</label>
+                    <label for="student_photo">Student Photo Upload (Click to upload | JPG, PNG Max 2MB)</label>
                     <input id="student_photo" name="student_photo" type="file" accept=".jpg,.jpeg,.png">
                 </div>
 
@@ -103,8 +113,8 @@ if (!in_array($studentCurrency, ['EGP', 'USD'], true)) {
                     <input id="school_name" name="school_name" type="text" value="<?php echo ai_old('school_name'); ?>" required>
                 </div>
                 <div class="ai-field">
-                    <label for="faculty_major">Faculty / Major</label>
-                    <input id="faculty_major" name="faculty_major" type="text" value="<?php echo ai_old('faculty_major'); ?>">
+                    <label for="faculty_major">Faculty / Major *</label>
+                    <input id="faculty_major" name="faculty_major" type="text" value="<?php echo ai_old('faculty_major'); ?>" required>
                 </div>
                 <div class="ai-field">
                     <label for="academic_year">Current Academic Year</label>
@@ -181,16 +191,32 @@ if (!in_array($studentCurrency, ['EGP', 'USD'], true)) {
                         </div>
                     </div>
                 </div>
-                <div class="ai-submit-row">
-                    <a href="sbciairegistration.php" class="ai-button secondary">Back to Portals</a>
-                    <button class="ai-button" type="submit">Register as Student</button>
+                <div class="ai-submit-row" style="flex-direction: column; gap: 15px; align-items: center;">
+                    <div style="display: flex; gap: 14px; width: 100%; justify-content: center;">
+                        <a href="sbciairegistration.php" class="ai-button secondary">Back to Portals</a>
+                        <button class="ai-button" type="submit">Register as Student</button>
+                    </div>
+                    <p style="color: var(--ai-muted); font-size: 14px; margin: 5px 0 0;">Already have an account? <a href="login.php" style="color: var(--ai-teal); font-weight: bold; text-decoration: underline;">Login</a></p>
                 </div>
             </div>
         </form>
     </div>
 </section>
 
-<?php ai_render_footer(); ?>
+<section class="ai-section ai-alt" style="padding-top: 0;">
+    <div class="ai-container">
+        <div class="ai-feature-grid six">
+            <div class="ai-feature-tile row"><?php echo ai_icon('bot'); ?><strong>AI Learning Assistant</strong></div>
+            <div class="ai-feature-tile row"><?php echo ai_icon('ai'); ?><strong>Smart Study Tools</strong></div>
+            <div class="ai-feature-tile row"><?php echo ai_icon('exam'); ?><strong>AI Exam Preparation</strong></div>
+            <div class="ai-feature-tile row"><?php echo ai_icon('training'); ?><strong>Online Courses</strong></div>
+            <div class="ai-feature-tile row"><?php echo ai_icon('globe'); ?><strong>International Community</strong></div>
+            <div class="ai-feature-tile row"><?php echo ai_icon('briefcase'); ?><strong>Career Development</strong></div>
+        </div>
+    </div>
+</section>
+
+<?php ai_render_ai_footer(); ?>
 <?php ai_render_scripts(); ?>
 </body>
 </html>

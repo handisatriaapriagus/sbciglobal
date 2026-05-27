@@ -8,6 +8,7 @@ $result = ai_handle_submission(
         'full_name' => 'Full Name',
         'email_address' => 'Email Address',
         'whatsapp_number' => 'Mobile Number / WhatsApp',
+        'country' => 'Country',
         'subjects_courses' => 'Subjects / Courses',
         'selected_plan' => 'Selected Teacher Plan',
     ],
@@ -36,7 +37,14 @@ if (!in_array($teacherCurrency, ['EGP', 'USD'], true)) {
     <div class="ai-form-title">
         <p class="ai-kicker">Empower. Teach. Inspire.</p>
         <h1>Teacher <span class="ai-gradient-text">Registration</span></h1>
-        <p>Build your teaching brand, reach the world, create courses, and access the SBCI AI teacher marketplace.</p>
+        <p>Build Your Teaching Brand. Reach the World.</p>
+        <div class="ai-chip-line">
+            <span class="ai-pill"><?php echo ai_icon('gift'); ?>Free Demo Access</span>
+            <span class="ai-pill"><?php echo ai_icon('dollar'); ?>Cashback Up To 20%</span>
+            <span class="ai-pill"><?php echo ai_icon('shield'); ?>Free Course Sponsorship</span>
+            <span class="ai-pill"><?php echo ai_icon('globe'); ?>International Promotion</span>
+            <span class="ai-pill"><?php echo ai_icon('users'); ?>Global Teacher Community</span>
+        </div>
     </div>
 </main>
 
@@ -44,13 +52,15 @@ if (!in_array($teacherCurrency, ['EGP', 'USD'], true)) {
     <aside class="ai-form-sidebar">
         <h2>Teacher Benefits</h2>
         <ul class="ai-list">
-            <li>1 Month free subscription voucher.</li>
-            <li>Cashback up to 20%.</li>
-            <li>Free course sponsorship access.</li>
-            <li>International teacher promotion.</li>
-            <li>Access to teacher marketplace.</li>
-            <li>AI teaching assistant.</li>
-            <li>Monetize your knowledge.</li>
+            <li>1 Month Free Subscription Voucher</li>
+            <li>Free Demo Access</li>
+            <li>Cashback Up To 20%</li>
+            <li>Free Course Sponsorship</li>
+            <li>International Promotion</li>
+            <li>Access to Teacher Marketplace</li>
+            <li>AI Teaching Assistant</li>
+            <li>Monetize Your Knowledge</li>
+            <li>Global Teacher Community</li>
         </ul>
     </aside>
 
@@ -77,8 +87,8 @@ if (!in_array($teacherCurrency, ['EGP', 'USD'], true)) {
                     <input id="nationality" name="nationality" type="text" value="<?php echo ai_old('nationality'); ?>">
                 </div>
                 <div class="ai-field">
-                    <label for="country">Country</label>
-                    <input id="country" name="country" type="text" value="<?php echo ai_old('country'); ?>">
+                    <label for="country">Country *</label>
+                    <input id="country" name="country" type="text" value="<?php echo ai_old('country'); ?>" required>
                 </div>
                 <div class="ai-field">
                     <label for="current_institution">Current Institution</label>
@@ -167,16 +177,32 @@ if (!in_array($teacherCurrency, ['EGP', 'USD'], true)) {
                         </div>
                     </div>
                 </div>
-                <div class="ai-submit-row">
-                    <a href="sbciaisponsor.php" class="ai-button secondary">Apply for Sponsorship</a>
-                    <button class="ai-button" type="submit">Register as Teacher</button>
+                <div class="ai-submit-row" style="flex-direction: column; gap: 15px; align-items: center;">
+                    <div style="display: flex; gap: 14px; width: 100%; justify-content: center;">
+                        <a href="sbciairegistration.php" class="ai-button secondary">Back to Portals</a>
+                        <button class="ai-button" type="submit">Register as Teacher</button>
+                    </div>
+                    <p style="color: var(--ai-muted); font-size: 14px; margin: 5px 0 0;">Already have an account? <a href="login.php" style="color: var(--ai-teal); font-weight: bold; text-decoration: underline;">Login</a></p>
                 </div>
             </div>
         </form>
     </div>
 </section>
 
-<?php ai_render_footer(); ?>
+<section class="ai-section ai-alt" style="padding-top: 0;">
+    <div class="ai-container">
+        <div class="ai-feature-grid six">
+            <div class="ai-feature-tile row"><?php echo ai_icon('globe'); ?><strong>Global Exposure</strong></div>
+            <div class="ai-feature-tile row"><?php echo ai_icon('dollar'); ?><strong>Increase Your Income</strong></div>
+            <div class="ai-feature-tile row"><?php echo ai_icon('ai'); ?><strong>AI Tools for Teaching</strong></div>
+            <div class="ai-feature-tile row"><?php echo ai_icon('users'); ?><strong>International Students</strong></div>
+            <div class="ai-feature-tile row"><?php echo ai_icon('teacher'); ?><strong>Flexible Teaching</strong></div>
+            <div class="ai-feature-tile row"><?php echo ai_icon('rocket'); ?><strong>Grow Your Brand</strong></div>
+        </div>
+    </div>
+</section>
+
+<?php ai_render_ai_footer(); ?>
 <?php ai_render_scripts(); ?>
 </body>
 </html>

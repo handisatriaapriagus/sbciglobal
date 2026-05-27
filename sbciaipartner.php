@@ -8,6 +8,8 @@ $result = ai_handle_submission(
         'full_name' => 'Full Name',
         'email_address' => 'Email Address',
         'whatsapp_number' => 'Mobile Number / WhatsApp',
+        'country' => 'Country',
+        'city' => 'City',
         'partner_type' => 'Partner Type',
         'target_audience' => 'Target Audience',
         'referral_goal' => 'Referral Goal',
@@ -26,9 +28,16 @@ $result = ai_handle_submission(
 
 <main class="ai-form-hero" style="--form-hero-image: url('assets/0f395fbe-d33e-4557-b364-80ece7c038b9.jpg');">
     <div class="ai-form-title">
-        <p class="ai-kicker">Invite. Inspire. Earn together.</p>
-        <h1>Refer, Earn and Grow <span class="ai-gradient-text">with SBCI AI</span></h1>
-        <p>Join the referral and cashback program for students, teachers, institutions, organizations, and education partners.</p>
+        <p class="ai-kicker">Referral & Cashback Program</p>
+        <h1>Refer, Earn & Grow <span class="ai-gradient-text">with SBCI AI</span></h1>
+        <p>Invite • Inspire • Earn Together<br>Empowering Egypt's Education, Today & Tomorrow.</p>
+        <div class="ai-chip-line">
+            <span class="ai-pill"><?php echo ai_icon('coins'); ?>Cashback Up To 20%</span>
+            <span class="ai-pill"><?php echo ai_icon('gift'); ?>Earn More Unlock More</span>
+            <span class="ai-pill"><?php echo ai_icon('ai'); ?>No Limits</span>
+            <span class="ai-pill"><?php echo ai_icon('users'); ?>Global Community</span>
+            <span class="ai-pill"><?php echo ai_icon('shield'); ?>Trusted & Secure</span>
+        </div>
     </div>
 </main>
 
@@ -47,19 +56,31 @@ $result = ai_handle_submission(
     <aside class="ai-form-sidebar">
         <h2>How it works</h2>
         <ul class="ai-list">
-            <li>Share your unique referral link or code with your network.</li>
-            <li>Your referral joins SBCI AI using your referral details.</li>
-            <li>They subscribe to any paid plan.</li>
-            <li>You earn cashback based on their subscription plan.</li>
-            <li>Both of you grow with premium education features.</li>
+            <li><strong>SHARE:</strong> Share your unique referral link or code with your network.</li>
+            <li><strong>JOIN:</strong> Your friend joins SBCI AI platform using your referral link/code.</li>
+            <li><strong>SUBSCRIBE:</strong> They subscribe to any paid plan.</li>
+            <li><strong>YOU EARN:</strong> You earn instant cashback based on their subscription plan.</li>
+            <li><strong>GROW TOGETHER:</strong> Both you and your friend enjoy premium features and grow together.</li>
         </ul>
+
+        <h2 style="margin-top: 28px;">Why Join Our Referral Program?</h2>
+        <ul class="ai-list">
+            <li>Easy to Join & Start Earning</li>
+            <li>Instant Cashback on Success</li>
+            <li>Attract More, Earn More</li>
+            <li>No Investment Required</li>
+            <li>Exclusive Rewards & Bonuses</li>
+            <li>Transparent & Real-Time Tracking</li>
+            <li>Support Education & Build a Better Future</li>
+        </ul>
+
         <h2 style="margin-top: 28px;">Agent Levels</h2>
         <ul class="ai-list">
-            <li>Starter Agent: Refer 5 paid users.</li>
-            <li>Silver Agent: Refer 20 paid users.</li>
-            <li>Gold Agent: Refer 50 paid users.</li>
-            <li>Platinum Agent: Refer 100 paid users.</li>
-            <li>Diamond Agent: Refer 200+ paid users.</li>
+            <li>Starter Agent: Refer 5 Paid Users. Up to 15% Commission.</li>
+            <li>Silver Agent: Refer 20 Paid Users. Up to 18% Commission.</li>
+            <li>Gold Agent: Refer 50 Paid Users. Up to 20% Commission.</li>
+            <li>Platinum Agent: Refer 100 Paid Users. Up to 22% Commission.</li>
+            <li>Diamond Agent: Refer 200+ Paid Users. Up to 25% Commission.</li>
         </ul>
     </aside>
 
@@ -82,8 +103,12 @@ $result = ai_handle_submission(
                     <input id="email_address" name="email_address" type="email" value="<?php echo ai_old('email_address'); ?>" required>
                 </div>
                 <div class="ai-field">
-                    <label for="country_city">Country / City</label>
-                    <input id="country_city" name="country_city" type="text" value="<?php echo ai_old('country_city'); ?>">
+                    <label for="country">Country *</label>
+                    <input id="country" name="country" type="text" value="<?php echo ai_old('country'); ?>" required>
+                </div>
+                <div class="ai-field">
+                    <label for="city">City *</label>
+                    <input id="city" name="city" type="text" value="<?php echo ai_old('city'); ?>" required>
                 </div>
                 <div class="ai-field">
                     <label for="partner_type">Partner Type *</label>
@@ -171,7 +196,10 @@ $result = ai_handle_submission(
                         <th>Student Pro</th>
                         <th>Teacher Basic</th>
                         <th>Teacher Pro</th>
-                        <th>Institution Plans</th>
+                        <th>Smart School</th>
+                        <th>Smart University</th>
+                        <th>White Label Platform</th>
+                        <th>National Partnership</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -182,6 +210,9 @@ $result = ai_handle_submission(
                         <td>20%</td>
                         <td>15%</td>
                         <td>20%</td>
+                        <td>Up to 15%</td>
+                        <td>Up to 15%</td>
+                        <td>Up to 20%</td>
                         <td>Up to 20%</td>
                     </tr>
                     <tr>
@@ -192,18 +223,41 @@ $result = ai_handle_submission(
                         <td>75 EGP</td>
                         <td>180 EGP</td>
                         <td>Custom</td>
+                        <td>Custom</td>
+                        <td>Custom</td>
+                        <td>Custom</td>
                     </tr>
                     <tr>
                         <td>Payout</td>
-                        <td colspan="6">Wallet / bank transfer / mobile money after verification</td>
+                        <td colspan="10">Wallet / Bank Transfer / Mobile Money after verification</td>
                     </tr>
                 </tbody>
             </table>
         </div>
+        <div class="ai-grid three" style="margin-top: 22px;">
+            <article class="ai-card">
+                <h3>How To Maximize Your Earnings?</h3>
+                <ul class="ai-list">
+                    <li>Share your link on social media</li>
+                    <li>Create educational content & promote</li>
+                    <li>Connect with students, teachers & institutions</li>
+                    <li>Offer value, build trust & inspire others</li>
+                    <li>Track performance & improve continuously</li>
+                </ul>
+            </article>
+            <article class="ai-card warm">
+                <h3>Earn Up To 20% Cashback</h3>
+                <p>On Every Successful Referral!</p>
+            </article>
+            <article class="ai-card">
+                <h3>Who Can Join?</h3>
+                <p>Students, Teachers, Institutions, Organizations, Anyone who wants to make an impact.</p>
+            </article>
+        </div>
     </div>
 </section>
 
-<?php ai_render_footer(); ?>
+<?php ai_render_ai_footer(); ?>
 <?php ai_render_scripts(); ?>
 </body>
 </html>

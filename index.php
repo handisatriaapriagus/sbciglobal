@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['full_name'])) {
     <header class="navbar">
         <div class="container nav-container">
             <div class="logo-area">
-                <img src="assets/logo.png" alt="SBCI Shield Logo" style="width: 106px; margin-bottom: 5px;">
+                <img src="assets/logo.png" alt="SBCI Shield Logo" style="width: 140px; margin-bottom: 5px;">
             </div>
 
             <!-- Hamburger for Mobile -->
@@ -116,12 +116,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['full_name'])) {
 
                 <div class="action-area">
                     <a href="#join-us" class="btn-primary">JOIN US</a>
+                    <span class="btn-sub">Request Free Consulting & Feasibility Snapshot</span>
                 </div>
             </div>
         </div>
 
         <!-- Dot Pattern Ornament -->
         <div class="dot-pattern"></div>
+        <span class="footer-label">Authorized Channel Partner UAE-ASEAN</span>
     </main>
 
     <!-- Who Are We Section -->
@@ -1695,9 +1697,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['full_name'])) {
                 
                 <div style="display: flex; gap: 20px; align-items: center; margin-top: 10px;">
                     <div style="flex: 1; text-align: center;">
-                        <img src="assets/logo.png" alt="SBCI Shield Logo" style="width: 114px; margin-bottom: 5px;">
+                        <img src="assets/logo.png" alt="SBCI Shield Logo" style="width: 160px; margin-bottom: 5px;">
                         <p style="color: #666; font-size: 10px; letter-spacing: 1px;">AUTHORIZED BUSINESS PARTNER</p>
-                        <p style="color: #666; font-size: 12px; margin-top: 10px;">Copyright @ 2026 SBCI Global Group</p>
+                        <p style="color: #666; font-size: 12px; margin-top: 10px;">Copyright @ 2025 SBCI Global Group</p>
                     </div>
                     <div style="background-color: #2fb0ba; padding: 15px; text-align: center; border-radius: 4px;">
                         <img src="assets/qr_scan.png" alt="QR Code" style="width: 100px; height: 100px; border-radius: 4px; margin-bottom: 5px; background: #fff; padding: 5px;">
