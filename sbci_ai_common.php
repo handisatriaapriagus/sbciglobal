@@ -212,12 +212,36 @@ function ai_handle_submission($pdo, $formType, $requiredFields, $uploadFields = 
         ]);
 
         $subject = 'New SBCI AI ' . ai_form_label($formType) . ' Submission';
-        $mailBody = "A new SBCI AI submission was received.\n\n" .
-            "Form: " . ai_form_label($formType) . "\n" .
-            "Name: " . trim((string) $name) . "\n" .
-            "Email: " . trim((string) $email) . "\n" .
-            "Phone: " . trim((string) $phone) . "\n";
-        @mail('info@sbciglobal.com', $subject, $mailBody, "From: noreply@sbciglobal.com\r\n");
+        $mailBody = "A new SBCI AI submission was received.\n\nForm: " . ai_form_label($formType) . "\n\n--- SUBMISSION DETAILS ---\n";
+        foreach ($payload as $key => $val) {
+            if (is_array($val)) {
+                $val = implode(', ', $val);
+            }
+            $mailBody .= ucwords(str_replace('_', ' ', $key)) . ": " . $val . "\n";
+        }
+        $adminEmails = 'info@sbciglobal.com, info.sbciglobalgroup@gmail.com';
+        $adminHeaders = "From: noreply@sbciglobal.com\r\nContent-Type: text/plain; charset=utf-8\r\n";
+        @mail($adminEmails, $subject, $mailBody, $adminHeaders);
+
+        if (!empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $clientSubject = 'SBCI AI - Submission Received Successfully';
+            $clientBody = "Dear Valued Client,\n\n" .
+                "Thank you for submitting your registration request with SBCI AI.\n\n" .
+                "We are pleased to confirm that your form has been received successfully. Our customer support team will review your request and contact you shortly to arrange your FREE demo session and activate your selected package as soon as possible.\n\n" .
+                "🚀 What's Next?\n" .
+                "• Free personalized demo presentation\n" .
+                "• Package activation support\n" .
+                "• AI platform onboarding assistance\n" .
+                "• Dedicated customer service follow-up\n\n" .
+                "🎁 Referral & Cashback Program\n" .
+                "Invite your friends, university, school, or educational institution to join SBCI AI and enjoy cashback rewards up to 20% through our referral partnership program.\n\n" .
+                "Thank you for choosing SBCI AI - Empowering Smart Education & Integrated Digital Solutions.\n\n" .
+                "Best Regards,\n" .
+                "SBCI AI | Integrated Digital Solutions\n" .
+                "Powered by DigiGate AI\n";
+            $clientHeaders = "From: info@sbciglobal.com\r\nContent-Type: text/plain; charset=utf-8\r\n";
+            @mail($email, $clientSubject, $clientBody, $clientHeaders);
+        }
 
         $_POST = [];
         return ['status' => 'success', 'message' => 'Thank you. Your SBCI AI request has been submitted successfully. Our team will contact you shortly.'];
