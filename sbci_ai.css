@@ -601,45 +601,22 @@ body.ai-page {
     color: #dce1fb;
     font-size: 18px;
     line-height: 1.7;
+
+.ai-form-title h1 {
+    max-width: 920px;
+    font-size: clamp(38px, 5.5vw, 72px);
+}
+
+.ai-form-title p {
+    max-width: 720px;
+    color: #dce1fb;
+    font-size: 18px;
+    line-height: 1.7;
 }
 
 .ai-form-shell {
     width: min(1200px, calc(100vw - 32px));
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: minmax(260px, 0.36fr) minmax(0, 1fr);
-    gap: 22px;
-    padding: 28px 0 90px;
-}
-
-.ai-form-sidebar,
-.ai-form-card {
-    padding: 24px;
-}
-
-.ai-form-sidebar {
-    border: 1px solid var(--ai-border);
-    border-radius: 8px;
-    background: rgba(8, 10, 26, 0.84);
-    align-self: start;
-}
-
-.ai-form-card {
-    background: rgba(8, 10, 26, 0.9);
-    backdrop-filter: blur(12px);
-}
-
-.ai-form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-}
-
-.ai-form-grid.three {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.ai-form-section {
     grid-column: 1 / -1;
     margin: 12px 0 2px;
     padding: 14px 16px;

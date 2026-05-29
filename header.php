@@ -113,12 +113,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['full_name'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+    <?php 
+    $current_page = basename($_SERVER['PHP_SELF']);
+    $is_home = ($current_page === 'index.php' || $current_page === '');
+    $is_ai = (strpos($current_page, 'sbciai') !== false || strpos($current_page, 'registration') !== false);
+    if ($is_ai): 
+    ?>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="sbci_ai.css">
+    <?php endif; ?>
 </head>
-<?php
-$current_page = basename($_SERVER['PHP_SELF']);
-$is_home = ($current_page === 'index.php' || $current_page === '');
-?>
-<body class="<?= $is_home ? 'home-page' : 'subpage' ?>">
+<body class="<?= $is_home ? 'home-page' : 'subpage' ?><?= $is_ai ? ' ai-page' : '' ?>">
 
     <!-- Header / Navbar -->
     <header class="navbar">
@@ -136,11 +141,20 @@ $is_home = ($current_page === 'index.php' || $current_page === '');
 
             <nav class="nav-links">
                 <a href="index.php" class="<?= $is_home ? 'active' : '' ?>">Home</a>
-                <a href="sbciai.php">SBCI AI</a>
                 <a href="digital-pack.php" class="<?= $current_page == 'digital-pack.php' ? 'active' : '' ?>">Digital Pack</a>
                 <a href="consulting-pack.php" class="<?= $current_page == 'consulting-pack.php' ? 'active' : '' ?>">Consulting Pack</a>
                 <a href="business-setup-pack.php" class="<?= $current_page == 'business-setup-pack.php' ? 'active' : '' ?>">Business Setup Pack</a>
                 <a href="training-pack.php" class="<?= $current_page == 'training-pack.php' ? 'active' : '' ?>">Training Pack</a>
+                <a href="sbciai.php" class="<?= $current_page == 'sbciai.php' ? 'active' : '' ?>">SBCI AI</a>
+                <div class="dropdown">
+                    <a href="sbciairegistration.php" class="dropbtn <?= strpos($current_page, 'registration') !== false ? 'active' : '' ?>" style="color: #c026d3;">Registration AI &#9660;</a>
+                    <div class="dropdown-content">
+                        <a href="sbciaistudentregistration.php">Student Portal</a>
+                        <a href="sbciteacherregistration.php">Teacher Portal</a>
+                        <a href="universityschoolregistration.php">School/Univ. Portal</a>
+                        <a href="sbciaipartner.php">Partnership</a>
+                    </div>
+                </div>
                 <a href="login.php" style="color: #ffd000; font-weight: 600;">Member Login</a>
                 <a href="policy.php" class="<?= $current_page == 'policy.php' ? 'active' : '' ?>">Policy</a>
                 <a href="join-us.php" class="search-icon <?= $current_page == 'join-us.php' ? 'active' : '' ?>">Join Us

@@ -17,13 +17,7 @@ function ai_registration_card($href, $icon, $title, $items, $button) {
     <?php
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <?php ai_render_head('SBCI AI Registration | Choose Your Portal'); ?>
-</head>
-<body class="ai-page ai-form-page">
-<?php ai_render_nav('registration'); ?>
+<?php include 'header.php'; ?>
 
 <main class="ai-brochure-hero">
     <div class="ai-brochure-container">
@@ -222,7 +216,5 @@ function ai_registration_card($href, $icon, $title, $items, $button) {
     </div>
 </section>
 
-<?php ai_render_ai_footer(); ?>
 <?php ai_render_scripts(); ?>
-</body>
-</html>
+<?php include 'footer.php'; ?>

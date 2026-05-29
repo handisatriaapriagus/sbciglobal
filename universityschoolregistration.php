@@ -19,13 +19,7 @@ $result = ai_handle_submission(
     ]
 );
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <?php ai_render_head('SBCI AI University / School Registration'); ?>
-</head>
-<body class="ai-page ai-form-page">
-<?php ai_render_nav('registration'); ?>
+<?php include 'header.php'; ?>
 
 <main class="ai-form-hero" style="--form-hero-image: url('assets/c146f6e7-a7c5-42ec-92db-20844f4134ef.jpg');">
     <div class="ai-form-title">
@@ -175,7 +169,5 @@ $result = ai_handle_submission(
     </div>
 </section>
 
-<?php ai_render_ai_footer(); ?>
 <?php ai_render_scripts(); ?>
-</body>
-</html>
+<?php include 'footer.php'; ?>

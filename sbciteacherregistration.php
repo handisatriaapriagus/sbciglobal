@@ -25,13 +25,7 @@ if (!in_array($teacherCurrency, ['EGP', 'USD'], true)) {
     $teacherCurrency = stripos($selectedPlan, 'USD') !== false ? 'USD' : 'EGP';
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <?php ai_render_head('SBCI AI Teacher Registration'); ?>
-</head>
-<body class="ai-page ai-form-page">
-<?php ai_render_nav('registration'); ?>
+<?php include 'header.php'; ?>
 
 <main class="ai-form-hero" style="--form-hero-image: url('assets/bb061704-3018-46e8-af80-467e8f1124aa.jpg');">
     <div class="ai-form-title">
@@ -202,7 +196,5 @@ if (!in_array($teacherCurrency, ['EGP', 'USD'], true)) {
     </div>
 </section>
 
-<?php ai_render_ai_footer(); ?>
 <?php ai_render_scripts(); ?>
-</body>
-</html>
+<?php include 'footer.php'; ?>

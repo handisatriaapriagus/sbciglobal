@@ -18,13 +18,7 @@ $result = ai_handle_submission(
     ['profile_attachment' => 'Profile Attachment']
 );
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <?php ai_render_head('SBCI AI Partner and Referral Program'); ?>
-</head>
-<body class="ai-page ai-form-page">
-<?php ai_render_nav('partner'); ?>
+<?php include 'header.php'; ?>
 
 <main class="ai-form-hero" style="--form-hero-image: url('assets/0f395fbe-d33e-4557-b364-80ece7c038b9.jpg');">
     <div class="ai-form-title">
@@ -257,7 +251,5 @@ $result = ai_handle_submission(
     </div>
 </section>
 
-<?php ai_render_ai_footer(); ?>
 <?php ai_render_scripts(); ?>
-</body>
-</html>
+<?php include 'footer.php'; ?>

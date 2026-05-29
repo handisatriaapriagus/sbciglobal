@@ -27,13 +27,7 @@ if (!in_array($studentCurrency, ['EGP', 'USD'], true)) {
     $studentCurrency = stripos($selectedPlan, 'USD') !== false ? 'USD' : 'EGP';
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <?php ai_render_head('SBCI AI Student Registration'); ?>
-</head>
-<body class="ai-page ai-form-page">
-<?php ai_render_nav('registration'); ?>
+<?php include 'header.php'; ?>
 
 <main class="ai-form-hero" style="--form-hero-image: url('assets/edee9894-54d5-4057-93cc-dcb520f31896.jpg');">
     <div class="ai-form-title">
@@ -216,7 +210,5 @@ if (!in_array($studentCurrency, ['EGP', 'USD'], true)) {
     </div>
 </section>
 
-<?php ai_render_ai_footer(); ?>
 <?php ai_render_scripts(); ?>
-</body>
-</html>
+<?php include 'footer.php'; ?>
