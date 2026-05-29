@@ -1247,3 +1247,13 @@ body {
 html {
     scroll-behavior: smooth;
 }
+
+/* Offset for fixed header on subpages */
+body.subpage > section:first-of-type {
+    padding-top: 180px !important;
+}
+
+/* Ensure the navbar background stays opaque on subpages */
+body.subpage .navbar {
+    background: rgba(20, 24, 28, 0.95);
+}
