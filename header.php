@@ -1,93 +1,60 @@
 <?php
 require_once 'db.php';
+require_once 'mail_notifications.php';
 
 $form_message = '';
 $form_status = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['full_name'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['form_type'] ?? '') === 'strategic_ticket') {
     $full_name = trim($_POST['full_name'] ?? '');
     $whatsapp_number = trim($_POST['whatsapp_number'] ?? '');
     $email_address = trim($_POST['email_address'] ?? '');
-    $packs = isset($_POST['packs']) ? implode(', ', $_POST['packs']) : '';
-    $objective = trim($_POST['objective'] ?? '');
-
-    if ($full_name && $whatsapp_number && $email_address) {
-        try {
-            $stmt = $pdo->prepare("INSERT INTO leads (full_name, whatsapp_number, email_address, selected_packs, objective) VALUES (?, ?, ?, ?, ?)");
-            if ($stmt->execute([$full_name, $whatsapp_number, $email_address, $packs, $objective])) {
-                $form_status = 'success';
-                $form_message = 'Thank you! Your strategic ticket has been successfully submitted. Our team will contact you shortly.';
-
-                // Send email notification handling
-                $to = 'info@sbciglobal.com';
-                $subject = 'New Strategic Ticket Submission - ' . $full_name;
-                $message = "You have received a new strategic ticket submission.\n\n" .
-                           "Details:\n" .
-                           "Name: $full_name\n" .
-                           "WhatsApp: $whatsapp_number\n" .
-                           "Email: $email_address\n" .
-                           "Packs Selected: $packs\n" .
-                           "Objective:\n$objective\n";
-                $headers = "From: noreply@sbciglobal.com\r\n" .
-                           "Reply-To: $email_address\r\n" .
-                           "X-Mailer: PHP/" . phpversion();
-
-                @mail($to, $subject, $message, $headers); // Supress errors from mail function in case server is not configured
-
-            } else {
-                $form_status = 'error';
-                $form_message = 'Something went wrong while submitting your ticket. Please try again.';
-            }
-        } catch (PDOException $e) {
-            $form_status = 'error';
-            $form_message = 'Failed to submit the form due to a database error.';
-        }
-    } else {
-        $form_status = 'error';
-        $form_message = 'Please fill in all required fields.';
+    $selected_packs = $_POST['packs'] ?? [];
+    if (!is_array($selected_packs)) {
+        $selected_packs = [];
     }
-}
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<?php
-require_once 'db.php';
-
-$form_message = '';
-$form_status = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['full_name'])) {
-    $full_name = trim($_POST['full_name'] ?? '');
-    $whatsapp_number = trim($_POST['whatsapp_number'] ?? '');
-    $email_address = trim($_POST['email_address'] ?? '');
-    $packs = isset($_POST['packs']) ? implode(', ', $_POST['packs']) : '';
+    $packs = implode(', ', array_map('strval', $selected_packs));
     $objective = trim($_POST['objective'] ?? '');
 
-    if ($full_name && $whatsapp_number && $email_address) {
+    if ($full_name && $whatsapp_number && $email_address && $packs && $objective && filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
         try {
             $stmt = $pdo->prepare("INSERT INTO leads (full_name, whatsapp_number, email_address, selected_packs, objective) VALUES (?, ?, ?, ?, ?)");
             if ($stmt->execute([$full_name, $whatsapp_number, $email_address, $packs, $objective])) {
                 $form_status = 'success';
                 $form_message = 'Thank you! Your strategic ticket has been successfully submitted. Our team will contact you shortly.';
 
-                // Send email notification handling
-                $to = 'info@sbciglobal.com';
                 $subject = 'New Strategic Ticket Submission - ' . $full_name;
-                $message = "You have received a new strategic ticket submission.\n\n" .
-                           "Details:\n" .
-                           "Name: $full_name\n" .
-                           "WhatsApp: $whatsapp_number\n" .
-                           "Email: $email_address\n" .
-                           "Packs Selected: $packs\n" .
-                           "Objective:\n$objective\n";
-                $headers = "From: noreply@sbciglobal.com\r\n" .
-                           "Reply-To: $email_address\r\n" .
-                           "X-Mailer: PHP/" . phpversion();
+                sbci_send_admin_notification(
+                    $subject,
+                    'A new SBCI Global strategic ticket was received.',
+                    [
+                        'full_name' => $full_name,
+                        'whatsapp_number' => $whatsapp_number,
+                        'email_address' => $email_address,
+                        'selected_packs' => $selected_packs,
+                        'objective' => $objective,
+                    ],
+                    $email_address
+                );
 
-                @mail($to, $subject, $message, $headers); // Supress errors from mail function in case server is not configured
+                sbci_send_client_confirmation($email_address, [
+                    'brand' => 'SBCI Global',
+                    'request_name' => 'strategic consulting ticket',
+                    'subject' => 'SBCI Global - Strategic Ticket Received Successfully',
+                    'confirmation' => 'Our expert division will review your request and contact you shortly via WhatsApp or email to arrange the next consultation step.',
+                    'next_steps' => [
+                        'Strategic ticket review',
+                        'Direct WhatsApp or email follow-up',
+                        'Consultation arrangement with our expert division',
+                        'Recommended solution and package guidance',
+                    ],
+                    'referral' => 'Invite your network to connect with SBCI Global and explore structured business, digital, consulting, setup, and training solutions.',
+                    'closing' => 'Thank you for choosing SBCI Global - Launch Smarter. Scale Faster.',
+                    'signature' => [
+                        'SBCI Global',
+                        'Launch Smarter. Scale Faster.',
+                    ],
+                ]);
 
             } else {
                 $form_status = 'error';
@@ -99,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['full_name'])) {
         }
     } else {
         $form_status = 'error';
-        $form_message = 'Please fill in all required fields.';
+        $form_message = 'Please fill in all required fields and enter a valid email address.';
     }
 }
 ?>
@@ -133,11 +100,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['full_name'])) {
             </div>
 
             <!-- Hamburger for Mobile -->
-            <div class="menu-toggle" id="mobile-menu">
+            <button class="menu-toggle" id="mobile-menu" type="button" aria-label="Open navigation" aria-expanded="false">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-            </div>
+            </button>
 
             <nav class="nav-links">
                 <a href="index.php" class="<?= $is_home ? 'active' : '' ?>">Home</a>

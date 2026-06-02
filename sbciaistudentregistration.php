@@ -17,14 +17,16 @@ $result = ai_handle_submission(
 );
 
 $studentPlans = [
-    ['name' => 'Basic', 'prices' => ['EGP' => '250', 'USD' => '5']],
-    ['name' => 'Advance', 'prices' => ['EGP' => '450', 'USD' => '9']],
-    ['name' => 'Pro', 'prices' => ['EGP' => '750', 'USD' => '15']],
+    ['name' => 'Basic', 'prices' => ['EGP' => '250', 'USD' => '5', 'IDR' => '80,000']],
+    ['name' => 'Advance', 'prices' => ['EGP' => '450', 'USD' => '9', 'IDR' => '144,000']],
+    ['name' => 'Pro', 'prices' => ['EGP' => '750', 'USD' => '15', 'IDR' => '240,000']],
 ];
 $studentCurrency = strtoupper((string) ($_POST['plan_currency'] ?? ''));
-if (!in_array($studentCurrency, ['EGP', 'USD'], true)) {
+if (!in_array($studentCurrency, ['EGP', 'USD', 'IDR'], true)) {
     $selectedPlan = (string) ($_POST['selected_plan'] ?? '');
-    $studentCurrency = stripos($selectedPlan, 'USD') !== false ? 'USD' : 'EGP';
+    $studentCurrency = stripos($selectedPlan, 'IDR') !== false
+        ? 'IDR'
+        : (stripos($selectedPlan, 'USD') !== false ? 'USD' : 'EGP');
 }
 ?>
 <?php include 'header.php'; ?>
@@ -149,8 +151,8 @@ if (!in_array($studentCurrency, ['EGP', 'USD'], true)) {
                     <div class="ai-plan-currency-block" data-plan-currency>
                         <div class="ai-plan-toolbar">
                             <span class="ai-choice-title">Currency</span>
-                            <div class="ai-currency-toggle" role="radiogroup" aria-label="Student plan currency">
-                                <?php foreach (['EGP', 'USD'] as $currency): ?>
+                            <div class="ai-currency-toggle three" role="radiogroup" aria-label="Student plan currency">
+                                <?php foreach (['EGP', 'USD', 'IDR'] as $currency): ?>
                                     <label>
                                         <input type="radio" name="plan_currency" value="<?php echo ai_h($currency); ?>" <?php echo $studentCurrency === $currency ? 'checked' : ''; ?>>
                                         <span><?php echo ai_h($currency); ?></span>
@@ -172,6 +174,7 @@ if (!in_array($studentCurrency, ['EGP', 'USD'], true)) {
                                         data-plan-name="<?php echo ai_h($plan['name']); ?>"
                                         data-price-egp="<?php echo ai_h($plan['prices']['EGP']); ?>"
                                         data-price-usd="<?php echo ai_h($plan['prices']['USD']); ?>"
+                                        data-price-idr="<?php echo ai_h($plan['prices']['IDR']); ?>"
                                         <?php echo $index === 0 ? 'required' : ''; ?>
                                         <?php echo ai_is_checked('selected_plan', $currentValue); ?>
                                     >
@@ -186,11 +189,11 @@ if (!in_array($studentCurrency, ['EGP', 'USD'], true)) {
                     </div>
                 </div>
                 <div class="ai-submit-row" style="flex-direction: column; gap: 15px; align-items: center;">
-                    <div style="display: flex; gap: 14px; width: 100%; justify-content: center;">
+                    <div style="display: flex; flex-wrap: wrap; gap: 14px; width: 100%; justify-content: center;">
                         <a href="sbciairegistration.php" class="ai-button secondary">Back to Portals</a>
                         <button class="ai-button" type="submit">Register as Student</button>
                     </div>
-                    <p style="color: var(--ai-muted); font-size: 14px; margin: 5px 0 0;">Already have an account? <a href="login.php" style="color: var(--ai-teal); font-weight: bold; text-decoration: underline;">Login</a></p>
+                    <p style="color: var(--ai-muted); font-size: 14px; margin: 5px 0 0; text-align: center;">Already have an account? <a href="login.php" style="color: var(--ai-teal); font-weight: bold; text-decoration: underline;">Login</a></p>
                 </div>
             </div>
         </form>

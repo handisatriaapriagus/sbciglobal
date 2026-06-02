@@ -17,6 +17,7 @@
 
                 <div style="border: 1px solid #2fb0ba; padding: 30px; border-radius: 8px;">
                     <form action="join-us.php" method="POST" style="display: flex; flex-direction: column; gap: 20px;">
+                        <input type="hidden" name="form_type" value="strategic_ticket">
                         <div style="display: flex; flex-direction: column; gap: 5px;">
                             <label style="color: #fff; font-size: 14px;">Full Name:</label>
                             <input type="text" name="full_name" required style="background: transparent; border: 1px solid #555; padding: 10px; color: #fff; border-radius: 4px;">

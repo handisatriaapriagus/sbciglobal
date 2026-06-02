@@ -1,5 +1,6 @@
 <?php
 require_once 'db.php';
+require_once 'mail_notifications.php';
 
 function ai_h($value) {
     return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
@@ -212,36 +213,18 @@ function ai_handle_submission($pdo, $formType, $requiredFields, $uploadFields = 
         ]);
 
         $subject = 'New SBCI AI ' . ai_form_label($formType) . ' Submission';
-        $mailBody = "A new SBCI AI submission was received.\n\nForm: " . ai_form_label($formType) . "\n\n--- SUBMISSION DETAILS ---\n";
-        foreach ($payload as $key => $val) {
-            if (is_array($val)) {
-                $val = implode(', ', $val);
-            }
-            $mailBody .= ucwords(str_replace('_', ' ', $key)) . ": " . $val . "\n";
+        $mailPayload = $payload;
+        if ($uploadResult) {
+            $mailPayload['uploaded_files'] = array_map('sbci_public_upload_url', $uploadResult);
         }
-        $adminEmails = 'info@sbciglobal.com, info.sbciglobalgroup@gmail.com';
-        $adminHeaders = "From: noreply@sbciglobal.com\r\nContent-Type: text/plain; charset=utf-8\r\n";
-        @mail($adminEmails, $subject, $mailBody, $adminHeaders);
+        sbci_send_admin_notification(
+            $subject,
+            'A new SBCI AI submission was received.' . "\n" . 'Form: ' . ai_form_label($formType),
+            $mailPayload,
+            $email
+        );
 
-        if (!empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $clientSubject = 'SBCI AI - Submission Received Successfully';
-            $clientBody = "Dear Valued Client,\n\n" .
-                "Thank you for submitting your registration request with SBCI AI.\n\n" .
-                "We are pleased to confirm that your form has been received successfully. Our customer support team will review your request and contact you shortly to arrange your FREE demo session and activate your selected package as soon as possible.\n\n" .
-                "🚀 What's Next?\n" .
-                "• Free personalized demo presentation\n" .
-                "• Package activation support\n" .
-                "• AI platform onboarding assistance\n" .
-                "• Dedicated customer service follow-up\n\n" .
-                "🎁 Referral & Cashback Program\n" .
-                "Invite your friends, university, school, or educational institution to join SBCI AI and enjoy cashback rewards up to 20% through our referral partnership program.\n\n" .
-                "Thank you for choosing SBCI AI - Empowering Smart Education & Integrated Digital Solutions.\n\n" .
-                "Best Regards,\n" .
-                "SBCI AI | Integrated Digital Solutions\n" .
-                "Powered by DigiGate AI\n";
-            $clientHeaders = "From: info@sbciglobal.com\r\nContent-Type: text/plain; charset=utf-8\r\n";
-            @mail($email, $clientSubject, $clientBody, $clientHeaders);
-        }
+        sbci_send_client_confirmation($email);
 
         $_POST = [];
         return ['status' => 'success', 'message' => 'Thank you. Your SBCI AI request has been submitted successfully. Our team will contact you shortly.'];
@@ -476,7 +459,7 @@ function ai_render_scripts() {
             const updatePlanPrices = () => {
                 const checkedCurrency = currencyBlock.querySelector('input[name="plan_currency"]:checked');
                 const currency = checkedCurrency ? checkedCurrency.value : 'EGP';
-                const priceKey = currency === 'USD' ? 'priceUsd' : 'priceEgp';
+                const priceKey = `price${currency.charAt(0)}${currency.slice(1).toLowerCase()}`;
 
                 planInputs.forEach((input) => {
                     const price = input.dataset[priceKey];

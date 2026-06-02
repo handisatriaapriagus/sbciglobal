@@ -104,6 +104,17 @@
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('open');
             menuToggle.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', navLinks.classList.contains('open') ? 'true' : 'false');
+        });
+
+        const registrationDropdown = document.querySelector('.nav-links .dropdown');
+        const registrationToggle = registrationDropdown?.querySelector('.dropbtn');
+
+        registrationToggle?.addEventListener('click', (event) => {
+            if (window.matchMedia('(max-width: 900px)').matches && !registrationDropdown.classList.contains('open')) {
+                event.preventDefault();
+                registrationDropdown.classList.add('open');
+            }
         });
 
         // Scroll Observer for Active Navigation

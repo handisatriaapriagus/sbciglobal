@@ -125,7 +125,7 @@ function ai_registration_card($href, $icon, $title, $items, $button) {
             <article class="ai-brochure-card">
                 <h3 class="ai-card-heading small">International Community</h3>
                 <p class="ai-brochure-copy">Connect. Collaborate & Learn Globally.</p>
-                <div class="ai-metric-strip" style="grid-template-columns: repeat(4, minmax(0,1fr));">
+                <div class="ai-metric-strip ai-community-metrics">
                     <div class="ai-metric"><?php echo ai_icon('teacher'); ?><span><strong>10K+</strong>Teachers</span></div>
                     <div class="ai-metric"><?php echo ai_icon('users'); ?><span><strong>500K+</strong>Students</span></div>
                     <div class="ai-metric"><?php echo ai_icon('globe'); ?><span><strong>100+</strong>Countries</span></div>
