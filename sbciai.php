@@ -7,13 +7,13 @@ require_once 'header.php';
         <img src="assets/ai/ai1.png" alt="SBCI AI Infographic Part 1" style="width: 100%; height: auto; display: block;">
         <img src="assets/ai/ai2.png" alt="SBCI AI Infographic Part 2" style="width: 100%; height: auto; display: block;">
         <img src="assets/ai/ai3.png" alt="SBCI AI Infographic Part 3" style="width: 100%; height: auto; display: block;">
-        <img src="assets/ai/ai4.png" alt="SBCI AI Infographic Part 4" style="width: 100%; height: auto; display: block;">
-        <img src="assets/ai/ai5.png" alt="SBCI AI Infographic Part 5" style="width: 100%; height: auto; display: block;">
-        <img src="assets/ai/ai6.png" alt="SBCI AI Infographic Part 6" style="width: 100%; height: auto; display: block;">
-        <img src="assets/ai/ai7.png" alt="SBCI AI Infographic Part 7" style="width: 100%; height: auto; display: block;">
+        <!-- <img src="assets/ai/ai4.png" alt="SBCI AI Infographic Part 4" style="width: 100%; height: auto; display: block;"> -->
+        <!-- <img src="assets/ai/ai5.png" alt="SBCI AI Infographic Part 5" style="width: 100%; height: auto; display: block;"> -->
+        <!-- <img src="assets/ai/ai6.png" alt="SBCI AI Infographic Part 6" style="width: 100%; height: auto; display: block;"> -->
+        <!-- <img src="assets/ai/ai7.png" alt="SBCI AI Infographic Part 7" style="width: 100%; height: auto; display: block;"> -->
         <img src="assets/ai/ai8.png" alt="SBCI AI Infographic Part 8" style="width: 100%; height: auto; display: block;">
         <img src="assets/ai/ai9.png" alt="SBCI AI Infographic Part 9" style="width: 100%; height: auto; display: block;">
-        <img src="assets/ai/ai10.png" alt="SBCI AI Infographic Part 10" style="width: 100%; height: auto; display: block;">
+        <img src="assets/ai/ai11.png" alt="SBCI AI Infographic Part 10" style="width: 100%; height: auto; display: block;">
     </div>
 </main>
 
